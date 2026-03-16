@@ -1,91 +1,31 @@
+<script>
+function generatePoster() {
 
-<!DOCTYPE html>
-<html>
-<head>
-  <title>AI Poster Generator</title>
-  <style>
-    body{
-      font-family: Arial, sans-serif;
-      text-align: center;
-      background: #f4f4f4;
-      padding: 40px;
-    }
-    h1{
-      font-size: 52px;
-      margin-bottom: 10px;
-    }
-    p{
-      font-size: 20px;
-      margin-bottom: 25px;
-    }
-    input{
-      padding: 14px;
-      width: 55%;
-      max-width: 420px;
-      font-size: 20px;
-    }
-    button{
-      padding: 14px 24px;
-      font-size: 20px;
-      cursor: pointer;
-      margin-left: 10px;
-    }
-    img{
-      margin-top: 30px;
-      max-width: 90%;
-      height: auto;
-      border-radius: 10px;
-      display: none;
-    }
-    #status{
-      margin-top: 20px;
-      font-size: 18px;
-      color: #444;
-    }
-  </style>
-</head>
-<body>
+  const prompt = document.getElementById("prompt").value.trim();
+  const img = document.getElementById("poster");
+  const status = document.getElementById("status");
 
-  <h1>AI Poster Generator</h1>
-  <p>Create advertisement posters using AI</p>
+  if (!prompt) {
+    status.textContent = "Please enter a prompt.";
+    img.style.display = "none";
+    return;
+  }
 
-  <input id="prompt" placeholder="Enter poster idea" />
-  <button onclick="generatePoster()">Generate Poster</button>
+  status.textContent = "Generating poster...";
+  img.style.display = "none";
 
-  <div id="status"></div>
-  <img id="poster" alt="Generated poster" />
+  const url = "https://source.unsplash.com/900x900/?" + encodeURIComponent(prompt + ", poster, advertisement");
 
-  <script>
-    function generatePoster() {
-      const prompt = document.getElementById("prompt").value.trim();
-      const img = document.getElementById("poster");
-      const status = document.getElementById("status");
+  img.onload = function () {
+    status.textContent = "Poster generated.";
+    img.style.display = "block";
+  };
 
-      if (!prompt) {
-        status.textContent = "Please enter a prompt.";
-        img.style.display = "none";
-        return;
-      }
+  img.onerror = function () {
+    status.textContent = "Image failed to load.";
+    img.style.display = "none";
+  };
 
-      status.textContent = "Generating poster...";
-      img.style.display = "none";
-
-      const finalPrompt = encodeURIComponent(prompt + ", advertisement poster, colorful marketing design, high quality");
-      const url = "https://image.pollinations.ai/prompt/" + finalPrompt;
-
-      img.onload = function () {
-        status.textContent = "Poster generated successfully.";
-        img.style.display = "block";
-      };
-
-      img.onerror = function () {
-        status.textContent = "Image failed to load. Try a prompt like: bakery grand opening poster";
-        img.style.display = "none";
-      };
-
-      img.src = url;
-    }
-  </script>
-
-</body>
-</html>
+  img.src = url;
+}
+</script>
