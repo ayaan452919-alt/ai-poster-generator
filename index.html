@@ -2,14 +2,59 @@
 <html>
 <head>
 <title>AI Poster Generator</title>
+
+<style>
+body{
+font-family:Arial;
+text-align:center;
+padding:40px;
+}
+
+input{
+padding:10px;
+width:250px;
+}
+
+button{
+padding:10px 20px;
+cursor:pointer;
+margin-left:10px;
+}
+
+img{
+margin-top:30px;
+max-width:400px;
+}
+</style>
+
 </head>
 
-<body style="text-align:center;font-family:Arial;padding:50px">
+<body>
 
 <h1>AI Poster Generator</h1>
 <p>Create advertisement posters using AI</p>
 
-<button>Generate Poster</button>
+<input id="prompt" placeholder="Enter poster idea">
+
+<button onclick="generatePoster()">Generate Poster</button>
+
+<br><br>
+
+<img id="poster">
+
+<script>
+
+function generatePoster(){
+
+let prompt = document.getElementById("prompt").value;
+
+let url = "https://image.pollinations.ai/prompt/" + prompt + " advertisement poster design";
+
+document.getElementById("poster").src = url;
+
+}
+
+</script>
 
 </body>
 </html>
