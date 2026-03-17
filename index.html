@@ -11,10 +11,6 @@
       background: #f4f4f4;
     }
 
-    h1 {
-      font-size: 40px;
-    }
-
     input {
       padding: 12px;
       width: 60%;
@@ -30,7 +26,6 @@
     img {
       margin-top: 30px;
       max-width: 90%;
-      display: none;
     }
 
     #status {
@@ -42,38 +37,41 @@
 
 <body>
 
-  <h1>AI Poster Generator</h1>
-  <p>Create advertisement posters using AI</p>
+<h1>AI Poster Generator</h1>
+<p>Create advertisement posters using AI</p>
 
-  <input id="prompt" placeholder="Enter poster idea">
-  <button onclick="generatePoster()">Generate Poster</button>
+<input id="prompt" placeholder="Enter poster idea">
+<button onclick="generatePoster()">Generate Poster</button>
 
-  <div id="status"></div>
-  <img id="poster">
+<div id="status"></div>
+<img id="poster" />
 
-  <script>
+<script>
 function generatePoster() {
-
   let prompt = document.getElementById("prompt").value;
   let img = document.getElementById("poster");
   let status = document.getElementById("status");
 
   if (!prompt) {
-    status.innerText = "Please enter a prompt";
+    status.innerText = "Enter something 😅";
     return;
   }
 
-  status.innerText = "Generating poster...";
-let url = "https://dummyimage.com/800x800/000/fff&text=" + encodeURIComponent(prompt);
-  img.onload = function () {
-    status.innerText = "Poster generated!";
-    img.style.display = "block";
+  status.innerText = "Generating...";
+
+  let url = "https://dummyimage.com/800x800/000/fff&text=" + encodeURIComponent(prompt);
+
+  img.onload = () => {
+    status.innerText = "Done ✅";
   };
 
-  img.onerror = function () {
-    status.innerText = "Failed to load image";
+  img.onerror = () => {
+    status.innerText = "Failed 😭";
   };
 
   img.src = url;
 }
-  </script>
+</script>
+
+</body>
+</html>
