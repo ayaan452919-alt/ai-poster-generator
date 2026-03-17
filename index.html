@@ -61,7 +61,7 @@ function generatePoster() {
   status.innerText = "Generating poster...";
 
   // Image from Unsplash (based on your idea)
-  let url = "https://source.unsplash.com/800x800/?" + encodeURIComponent(prompt + ",shop,fashion");
+ let url = "https://picsum.photos/800/800?random=" + new Date().getTime();
 
   // Taglines
   let taglines = [
