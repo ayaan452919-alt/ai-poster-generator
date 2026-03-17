@@ -32,7 +32,6 @@ style="padding:10px; width:60%; max-width:400px;">
 <br><br>
 
 <button id="downloadBtn" style="display:none;">Download</button>
-
 <script>
 function generatePoster() {
 
@@ -40,37 +39,40 @@ function generatePoster() {
   let img = document.getElementById("poster");
   let status = document.getElementById("status");
   let text = document.getElementById("posterText");
+  let downloadBtn = document.getElementById("downloadBtn");
 
   if (!prompt) {
-    status.innerText = "Enter something";
+    status.innerText = "Enter something 😅";
     return;
   }
 
-  status.innerText = "Loading...";
+  status.innerText = "Generating AI poster... ⏳";
 
-  let url = "https://picsum.photos/800?random=" + Date.now();
-
-  text.innerText = prompt.toUpperCase();
-
-  img.onload = function() {
-    status.innerText = "Done";
-    document.getElementById("downloadBtn").style.display = "inline";
-  };
-
-  img.onerror = function() {
-    status.innerText = "Failed";
-  };
-
-  img.src = url;
+  fetch("/api/generate", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ prompt: prompt })
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.image) {
+      img.src = data.image;
+      text.innerText = prompt.toUpperCase();
+      status.innerText = "Done ✅";
+      downloadBtn.style.display = "inline";
+    } else {
+      status.innerText = "Failed 😢";
+    }
+  })
+  .catch(() => {
+    status.innerText = "Error 😭";
+  });
 }
-
-document.getElementById("downloadBtn").onclick = function() {
-  let link = document.createElement("a");
-  link.href = document.getElementById("poster").src;
-  link.download = "poster.png";
-  link.click();
-};
 </script>
+
+
 
 </body>
 </html>
