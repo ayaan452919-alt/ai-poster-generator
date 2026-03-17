@@ -1,53 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>AI Poster Generator</title>
-
-  <style>
-    body {
-      font-family: Arial;
-      text-align: center;
-      padding: 40px;
-      background: #f4f4f4;
-    }
-
-    input {
-      padding: 12px;
-      width: 60%;
-      max-width: 400px;
-    }
-
-    button {
-      padding: 12px 20px;
-      margin-left: 10px;
-      cursor: pointer;
-    }
-
-    img {
-      margin-top: 30px;
-      max-width: 90%;
-    }
-
-    #status {
-      margin-top: 20px;
-      color: #555;
-    }
-  </style>
-</head>
-
-<body>
-
-<h1>AI Poster Generator</h1>
-<p>Create advertisement posters using AI</p>
-
-<input id="prompt" placeholder="Enter poster idea">
-<button onclick="generatePoster()">Generate Poster</button>
-
-<div id="status"></div>
-<img id="poster" />
-
 <script>
 function generatePoster() {
+
   let prompt = document.getElementById("prompt").value;
   let img = document.getElementById("poster");
   let status = document.getElementById("status");
@@ -59,19 +12,16 @@ function generatePoster() {
 
   status.innerText = "Generating...";
 
-  let url = "https://image.pollinations.ai/prompt/" + encodeURIComponent(prompt + " realistic advertisement poster, high quality, marketing design");
+  let url = "https://picsum.photos/800/800?random=" + new Date().getTime();
 
   img.onload = () => {
-    status.innerText = "Done ✅";
+    status.innerText = "Done ✅ (" + prompt + ")";
   };
 
   img.onerror = () => {
-    status.innerText = "Failed 😭";
+    status.innerText = "Still failed 😭";
   };
 
   img.src = url;
 }
 </script>
-
-</body>
-</html>
