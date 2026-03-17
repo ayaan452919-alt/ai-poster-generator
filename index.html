@@ -82,8 +82,10 @@ function generatePoster() {
     downloadBtn.style.display = "inline-block";
   };
 
-  img.onerror = () => {
-    status.innerText = "Image failed 😢 Try again";
+ img.onerror = () => {
+  status.innerText = "Retrying...";
+  img.src = "https://picsum.photos/800/800?random=" + new Date().getTime();
+};
   };
 
   img.src = "";
