@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>AI Poster Generator</title>
+<title>AI Poster Generator</title>
 </head>
 
 <body style="text-align:center; padding:40px; font-family:Arial; background:#f4f6f9;">
@@ -19,7 +19,23 @@ Generate
 
 <p id="status" style="margin-top:15px; color:#555;"></p>
 
-<img id="poster" style="max-width:90%; margin-top:20px; border-radius:12px;" />
+<!-- POSTER BOX -->
+<div id="posterContainer" style="position:relative; display:inline-block; margin-top:20px;">
+  
+  <img id="poster" style="max-width:90%; border-radius:12px;" />
+  
+  <h2 id="posterText" style="
+    position:absolute;
+    bottom:20px;
+    left:50%;
+    transform:translateX(-50%);
+    color:white;
+    background:rgba(0,0,0,0.6);
+    padding:10px 20px;
+    border-radius:8px;">
+  </h2>
+
+</div>
 
 <br>
 
@@ -29,41 +45,10 @@ Download Poster
 </button>
 
 <script>
+
 function generatePoster() {
 
   let prompt = document.getElementById("prompt").value;
   let img = document.getElementById("poster");
   let status = document.getElementById("status");
-
-  if (!prompt) {
-    status.innerText = "Enter something 😅";
-    return;
-  }
-
-  status.innerText = "Generating poster...";
-
-let url = "https://source.unsplash.com/800x800/?" + encodeURIComponent(prompt + ",poster");
-
-  img.onload = () => {
-    status.innerText = "Done ✅";
-    document.getElementById("downloadBtn").style.display = "inline";
-  };
-
-  img.onerror = () => {
-    status.innerText = "Failed 😭";
-  };
-
-  img.src = url;
-}
-
-document.getElementById("downloadBtn").onclick = () => {
-  let img = document.getElementById("poster");
-  let link = document.createElement("a");
-  link.href = img.src;
-  link.download = "poster.png";
-  link.click();
-};
-</script>
-
-</body>
-</html>
+  let text = document.getElementById
