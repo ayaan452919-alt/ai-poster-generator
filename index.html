@@ -45,6 +45,43 @@ Download Poster
 </button>
 
 <script>
+function generatePoster() {
+
+  let prompt = document.getElementById("prompt").value;
+  let img = document.getElementById("poster");
+  let status = document.getElementById("status");
+  let text = document.getElementById("posterText");
+
+  if (!prompt) {
+    status.innerText = "Enter something 😅";
+    return;
+  }
+
+  status.innerText = "Generating poster...";
+
+  let url = "https://picsum.photos/800/800?random=" + new Date().getTime();
+
+  text.innerText = prompt.toUpperCase();
+
+  img.onload = () => {
+    status.innerText = "Done ✅";
+    document.getElementById("downloadBtn").style.display = "inline";
+  };
+
+  img.onerror = () => {
+    status.innerText = "Failed 😢";
+  };
+
+  img.src = url;
+}
+
+document.getElementById("downloadBtn").onclick = () => {
+  let link = document.createElement("a");
+  link.href = document.getElementById("poster").src;
+  link.download = "poster.png";
+  link.click();
+};
+</script>
 
 function generatePoster() {
 
