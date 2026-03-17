@@ -1,27 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AI Poster Generator</title>
+</head>
+<body style="text-align:center; padding:40px; font-family:Arial;">
+
+<h1>AI Poster Generator</h1>
+
+<input id="prompt" placeholder="Enter idea">
+<button onclick="generatePoster()">Generate</button>
+
+<p id="status"></p>
+<img id="poster" style="max-width:90%; margin-top:20px;" />
+
 <script>
 function generatePoster() {
-
   let prompt = document.getElementById("prompt").value;
   let img = document.getElementById("poster");
   let status = document.getElementById("status");
 
   if (!prompt) {
-    status.innerText = "Enter something 😅";
+    status.innerText = "Enter something";
     return;
   }
 
-  status.innerText = "Generating...";
+  status.innerText = "Loading...";
 
-  let url = "https://picsum.photos/800/800?random=" + new Date().getTime();
+  let url = "https://picsum.photos/800?random=" + new Date().getTime();
 
-  img.onload = () => {
-    status.innerText = "Done ✅ (" + prompt + ")";
-  };
-
-  img.onerror = () => {
-    status.innerText = "Still failed 😭";
-  };
+  img.onload = () => status.innerText = "Done";
+  img.onerror = () => status.innerText = "Error";
 
   img.src = url;
 }
 </script>
+
+</body>
+</html>
