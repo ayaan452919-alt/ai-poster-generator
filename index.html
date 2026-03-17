@@ -65,8 +65,7 @@ function generatePoster() {
 
   status.innerText = "Generating poster...";
 
-  let url = "https://source.unsplash.com/800x800/?" + prompt + ",poster&" + new Date().getTime();
-
+let url = "https://image.pollinations.ai/prompt/" + encodeURIComponent(prompt + " poster design");
   img.onload = function () {
     status.innerText = "Poster generated!";
     img.style.display = "block";
