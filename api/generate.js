@@ -5,7 +5,7 @@ export default async function handler(req, res) {
     const response = await fetch("https://api.replicate.com/v1/predictions", {
       method: "POST",
       headers: {
-        "Authorization": "Token YOUR_API_KEY",
+        "Authorization": "Token r8_QGoTMxRTlpSLjno2kJrBaXRDCAuEM4H18NlnK",
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
@@ -26,7 +26,7 @@ export default async function handler(req, res) {
         await new Promise(r => setTimeout(r, 2000));
         const poll = await fetch(data.urls.get, {
           headers: {
-            "Authorization": "Token YOUR_API_KEY"
+            "Authorization": "Token r8_QGoTMxRTlpSLjno2kJrBaXRDCAuEM4H18NlnK"
           }
         });
         result = await poll.json();
