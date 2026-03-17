@@ -1,3 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AI Poster Generator</title>
+</head>
+
+<body style="text-align:center; padding:40px; font-family:Arial; background:#f4f6f9;">
+
+<h1>🎨 AI Poster Generator</h1>
+<p>Create posters using AI</p>
+
+<input id="prompt" placeholder="Enter idea"
+style="padding:10px; width:60%; max-width:400px;">
+
+<button onclick="generatePoster()">Generate</button>
+
+<p id="status"></p>
+
+<div style="position:relative; display:inline-block; margin-top:20px;">
+  <img id="poster" style="max-width:90%;">
+  <h2 id="posterText" style="
+    position:absolute;
+    bottom:20px;
+    left:50%;
+    transform:translateX(-50%);
+    color:white;
+    background:black;
+    padding:8px;">
+  </h2>
+</div>
+
+<br><br>
+
+<button id="downloadBtn" style="display:none;">Download</button>
+
 <script>
 function generatePoster() {
 
@@ -5,40 +40,37 @@ function generatePoster() {
   let img = document.getElementById("poster");
   let status = document.getElementById("status");
   let text = document.getElementById("posterText");
-  let downloadBtn = document.getElementById("downloadBtn");
 
   if (!prompt) {
-    status.innerText = "Enter something 😅";
+    status.innerText = "Enter something";
     return;
   }
 
-  status.innerText = "Generating poster...";
+  status.innerText = "Loading...";
 
-  // Always working image
-  let url = "https://picsum.photos/800/800?random=" + Date.now();
+  let url = "https://picsum.photos/800?random=" + Date.now();
 
-  // Poster text
   text.innerText = prompt.toUpperCase();
 
-  // Load success
-  img.onload = () => {
-    status.innerText = "Done ✅";
-    downloadBtn.style.display = "inline-block";
+  img.onload = function() {
+    status.innerText = "Done";
+    document.getElementById("downloadBtn").style.display = "inline";
   };
 
-  // Load error
-  img.onerror = () => {
-    status.innerText = "Failed 😢 Try again";
+  img.onerror = function() {
+    status.innerText = "Failed";
   };
 
   img.src = url;
 }
 
-// Download
-document.getElementById("downloadBtn").onclick = () => {
+document.getElementById("downloadBtn").onclick = function() {
   let link = document.createElement("a");
   link.href = document.getElementById("poster").src;
   link.download = "poster.png";
   link.click();
 };
 </script>
+
+</body>
+</html>
