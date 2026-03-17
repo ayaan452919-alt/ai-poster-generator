@@ -59,7 +59,7 @@ function generatePoster() {
 
   status.innerText = "Generating...";
 
-  let url = "https://dummyimage.com/800x800/000/fff&text=" + encodeURIComponent(prompt);
+  let url = "https://image.pollinations.ai/prompt/" + encodeURIComponent(prompt + " realistic advertisement poster, high quality, marketing design");
 
   img.onload = () => {
     status.innerText = "Done ✅";
