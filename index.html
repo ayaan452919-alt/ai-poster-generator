@@ -20,7 +20,7 @@ Generate
 <p id="status" style="margin-top:15px; color:#555;"></p>
 
 <!-- POSTER -->
-<div id="posterContainer" style="position:relative; display:inline-block; margin-top:20px;">
+<div style="position:relative; display:inline-block; margin-top:20px;">
   
   <img id="poster" style="max-width:90%; border-radius:12px;" />
   
@@ -60,11 +60,22 @@ function generatePoster() {
 
   status.innerText = "Generating poster...";
 
-  // Always working image source
-  let url = "https://picsum.photos/800/800?random=" + new Date().getTime();
+  // Image from Unsplash (based on your idea)
+  let url = "https://source.unsplash.com/800x800/?" + encodeURIComponent(prompt + ",shop,fashion");
+
+  // Taglines
+  let taglines = [
+    "Grand Opening 🎉",
+    "Flat 50% OFF 🔥",
+    "Limited Time Offer ⏳",
+    "New Collection Arrived ✨",
+    "Visit Today 🛍️"
+  ];
+
+  let randomTagline = taglines[Math.floor(Math.random() * taglines.length)];
 
   // Poster text
-  text.innerText = prompt.toUpperCase();
+  text.innerText = prompt.toUpperCase() + " - " + randomTagline;
 
   img.onload = () => {
     status.innerText = "Done ✅";
@@ -72,13 +83,13 @@ function generatePoster() {
   };
 
   img.onerror = () => {
-    status.innerText = "Failed 😢 Try again";
+    status.innerText = "Image failed 😢 Try again";
   };
 
   img.src = url;
 }
 
-// Download button
+// Download
 document.getElementById("downloadBtn").onclick = () => {
   let link = document.createElement("a");
   link.href = document.getElementById("poster").src;
@@ -89,3 +100,4 @@ document.getElementById("downloadBtn").onclick = () => {
 
 </body>
 </html>
+
