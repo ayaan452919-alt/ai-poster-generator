@@ -64,8 +64,7 @@ function generatePoster() {
   }
 
   status.innerText = "Generating poster...";
-
-let url = "https://image.pollinations.ai/prompt/" + encodeURIComponent(prompt + " poster design");
+let url = "https://dummyimage.com/800x800/000/fff&text=" + encodeURIComponent(prompt);
   img.onload = function () {
     status.innerText = "Poster generated!";
     img.style.display = "block";
