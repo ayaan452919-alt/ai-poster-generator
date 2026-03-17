@@ -86,7 +86,10 @@ function generatePoster() {
     status.innerText = "Image failed 😢 Try again";
   };
 
+  img.src = "";
+setTimeout(() => {
   img.src = url;
+}, 100);
 }
 
 // Download
