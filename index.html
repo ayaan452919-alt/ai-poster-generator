@@ -1,31 +1,62 @@
-<script>
-function generatePoster() {
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AI Poster Generator</title>
 
-  const prompt = document.getElementById("prompt").value.trim();
-  const img = document.getElementById("poster");
-  const status = document.getElementById("status");
+  <style>
+    body {
+      font-family: Arial;
+      text-align: center;
+      padding: 40px;
+      background: #f4f4f4;
+    }
 
-  if (!prompt) {
-    status.textContent = "Please enter a prompt.";
-    img.style.display = "none";
-    return;
-  }
+    h1 {
+      font-size: 40px;
+    }
 
-  status.textContent = "Generating poster...";
-  img.style.display = "none";
+    input {
+      padding: 12px;
+      width: 60%;
+      max-width: 400px;
+    }
 
-  const url = "https://source.unsplash.com/900x900/?" + encodeURIComponent(prompt + ", poster, advertisement");
+    button {
+      padding: 12px 20px;
+      margin-left: 10px;
+      cursor: pointer;
+    }
 
-  img.onload = function () {
-    status.textContent = "Poster generated.";
-    img.style.display = "block";
-  };
+    img {
+      margin-top: 30px;
+      max-width: 90%;
+      display: none;
+    }
 
-  img.onerror = function () {
-    status.textContent = "Image failed to load.";
-    img.style.display = "none";
-  };
+    #status {
+      margin-top: 20px;
+      color: #555;
+    }
+  </style>
+</head>
 
-  img.src = url;
-}
-</script>
+<body>
+
+  <h1>AI Poster Generator</h1>
+  <p>Create advertisement posters using AI</p>
+
+  <input id="prompt" placeholder="Enter poster idea">
+  <button onclick="generatePoster()">Generate Poster</button>
+
+  <div id="status"></div>
+  <img id="poster">
+
+  <script>
+    function generatePoster() {
+
+      let prompt = document.getElementById("prompt").value;
+      let img = document.getElementById("poster");
+      let status = document.getElementById("status");
+
+      if (!prompt) {
+        status
