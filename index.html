@@ -42,7 +42,7 @@ function generatePoster() {
 
   status.innerText = "Generating poster...";
 
-  let url = "https://picsum.photos/800/800?random=" + new Date().getTime();
+let url = "https://source.unsplash.com/800x800/?" + encodeURIComponent(prompt + ",poster");
 
   img.onload = () => {
     status.innerText = "Done ✅";
