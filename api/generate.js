@@ -12,8 +12,8 @@ export default async function handler(req, res) {
       body: JSON.stringify({
         version: "a9758cbf9b2d8c8e9f8b0e7c8e3f7c6f0d7c1c6b5e4a3f2d1c0b9a8e7f6d5c4b",
         input: {
-          prompt: prompt + ", advertisement poster, high quality, text"
-        }
+          prompt:
+        }prompt + ", professional advertisement poster, bold typography, modern design, branding, high contrast, centered text, marketing poster, realistic"
         }
       })
     });
