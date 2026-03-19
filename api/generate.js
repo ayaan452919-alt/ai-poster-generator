@@ -13,7 +13,20 @@ export default async function handler(req, res) {
         version: "a9758cbf9b2d8c8e9f8b0e7c8e3f7c6f0d7c1c6b5e4a3f2d1c0b9a8e7f6d5c4b",
         input: {
           prompt:
-        }prompt + ", professional advertisement poster, bold typography, modern design, branding, high contrast, centered text, marketing poster, realistic"
+            }export default async function handler(req, res) {
+  try {
+    const { prompt } = req.body;
+
+    const imageUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(
+      prompt + ", business advertisement poster, modern design, branding, cafe scene, people, warm lighting, bold title, marketing banner, high quality"
+    )}`;
+
+    res.status(200).json({ image: imageUrl });
+
+  } catch (error) {
+    res.status(500).json({ error: "Failed" });
+  }
+}
         }
       })
     });
