@@ -2,77 +2,103 @@
 <html>
 <head>
   <title>AI Poster Generator</title>
+  <style>
+    body {
+      font-family: Arial;
+      text-align: center;
+      background: #f5f5f5;
+      padding: 20px;
+    }
+
+    input {
+      padding: 10px;
+      width: 250px;
+    }
+
+    button {
+      padding: 10px 15px;
+      background: blue;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    img {
+      margin-top: 20px;
+      width: 300px;
+      border-radius: 10px;
+    }
+
+    #posterText {
+      position: relative;
+      top: -60px;
+      color: white;
+      background: black;
+      display: inline-block;
+      padding: 5px 10px;
+    }
+  </style>
 </head>
 
-<body style="text-align:center; padding:40px; font-family:Arial; background:#f4f6f9;">
+<body>
 
-<h1>🎨 AI Poster Generator</h1>
-<p>Create posters using AI</p>
+  <h2>🎨 AI Poster Generator</h2>
 
-<input id="prompt" placeholder="Enter idea"
-style="padding:10px; width:60%; max-width:400px;">
+  <input id="prompt" placeholder="Enter business idea" />
+  <button onclick="generatePoster()">Generate</button>
 
-<button onclick="generatePoster()">Generate</button>
+  <p id="status"></p>
 
-<p id="status"></p>
+  <div>
+    <img id="poster" />
+    <h3 id="posterText"></h3>
+  </div>
 
-<div style="position:relative; display:inline-block; margin-top:20px;">
-  <img id="poster" style="max-width:90%;">
-  <h2 id="posterText" style="
-    position:absolute;
-    bottom:20px;
-    left:50%;
-    transform:translateX(-50%);
-    color:white;
-    background:black;
-    padding:8px;">
-  </h2>
-</div>
+  <button id="downloadBtn" style="display:none;" onclick="downloadImage()">Download</button>
 
-<br><br>
+  <script>
+    function generatePoster() {
+      let prompt = document.getElementById("prompt").value;
+      let img = document.getElementById("poster");
+      let status = document.getElementById("status");
+      let text = document.getElementById("posterText");
+      let downloadBtn = document.getElementById("downloadBtn");
 
-<button id="downloadBtn" style="display:none;">Download</button>
-<script>
-function generatePoster() {
+      if (!prompt) {
+        status.innerText = "Enter something 😅";
+        return;
+      }
 
-  let prompt = document.getElementById("prompt").value;
-  let img = document.getElementById("poster");
-  let status = document.getElementById("status");
-  let text = document.getElementById("posterText");
-  let downloadBtn = document.getElementById("downloadBtn");
+      status.innerText = "Generating... ⏳";
 
-  if (!prompt) {
-    status.innerText = "Enter something 😅";
-    return;
-  }
-
-  status.innerText = "Generating AI poster... ⏳";
-
-  fetch("/api/generate", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({ prompt: prompt })
-  })
-  .then(res => res.json())
-  .then(data => {
-    if (data.image) {
-      img.src = data.image;
-      text.innerText = prompt.toUpperCase();
-      status.innerText = "Done ✅";
-      downloadBtn.style.display = "inline";
-    } else {
-      status.innerText = "Failed 😢";
+      fetch("/api/generate", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ prompt: prompt })
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data && data.image) {
+          img.src = data.image;
+          text.innerText = prompt.toUpperCase();
+          status.innerText = "Done ✅";
+          downloadBtn.style.display = "inline";
+        } else {
+          status.innerText = "Failed ❌";
+        }
+      })
+      .catch(() => {
+        status.innerText = "Error 🚨";
+      });
     }
-  })
-  .catch(() => {
-    status.innerText = "Error 😭";
-  });
-}
-</script>
 
-
-
-</body>
-</html>
+    function downloadImage() {
+      let img = document.getElementById("poster").src;
+      let a = document.createElement("a");
+      a.href = img;
+      a.download = "poster.png";
+      a.click();
+    }
+  </script
