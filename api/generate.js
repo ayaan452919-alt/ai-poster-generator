@@ -6,7 +6,7 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: "No prompt" });
     }
 
-    const finalPrompt = `${prompt}, professional advertisement poster, modern design, branding, high quality`;
+    const finalPrompt = `${prompt}, professional advertisement poster, modern design, branding, high quality, bold text, marketing banner`;
 
     const imageUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(finalPrompt)}?width=1024&height=1024`;
 
