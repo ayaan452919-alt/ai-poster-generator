@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+      <!DOCTYPE html>
 <html>
 <head>
   <title>AI Poster Generator</title>
@@ -71,27 +71,21 @@
 
       status.innerText = "Generating... ⏳";
 
-      fetch("/api/generate", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ prompt: prompt })
-      })
-      .then(res => res.json())
-      .then(data => {
-        if (data && data.image) {
-          img.src = data.image;
-          text.innerText = prompt.toUpperCase();
-          status.innerText = "Done ✅";
-          downloadBtn.style.display = "inline";
-        } else {
-          status.innerText = "Failed ❌";
-        }
-      })
-      .catch(() => {
-        status.innerText = "Error 🚨";
-      });
+      const finalPrompt = prompt + ", professional advertisement poster, modern design, branding, bold text";
+
+      const imageUrl = "https://image.pollinations.ai/prompt/" + encodeURIComponent(finalPrompt);
+
+      img.src = imageUrl;
+
+      img.onload = () => {
+        status.innerText = "Done ✅";
+        text.innerText = prompt.toUpperCase();
+        downloadBtn.style.display = "inline";
+      };
+
+      img.onerror = () => {
+        status.innerText = "Failed ❌";
+      };
     }
 
     function downloadImage() {
@@ -101,4 +95,7 @@
       a.download = "poster.png";
       a.click();
     }
-  </script
+  </script>
+
+</body>
+</html>
