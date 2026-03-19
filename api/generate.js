@@ -14,6 +14,7 @@ export default async function handler(req, res) {
         input: {
           prompt: prompt + ", advertisement poster, high quality, text"
         }
+        }
       })
     });
 
